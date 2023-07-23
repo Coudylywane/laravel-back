@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NiveauStoreRequest;
 use Illuminate\Http\Request;
 use App\Models\Niveau;
 
@@ -12,15 +13,20 @@ class NiveauController extends Controller
      */
     public function index()
     {
-        return Niveau::all();
+        // Utilisez la méthode select pour exclure la colonne 'cycle_id' de la requête
+        return Niveau::select('id', 'libelle')
+                        ->get();
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NiveauStoreRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $niveau = Niveau::create($validatedData);
+
+        return response()->json($niveau, 201);
     }
 
     /**
@@ -28,7 +34,8 @@ class NiveauController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Niveau::find($id);
+
     }
 
     /**

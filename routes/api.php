@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\NiveauController;
+use App\Http\Controllers\AnneeScolaireController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,8 @@ Route::middleware('auth:api')->group(function () {
 
 Route::apiResource("/cycles",CycleController::class)->except(["update","destroy"]);
 Route::apiResource("/niveaux",NiveauController::class)->except(["update","destroy"]);
+Route::apiResource("/annee",AnneeScolaireController::class)->except(["destroy"]);
+
 
 //Route::apiResource("/niveaux",NiveauController::class)->only(["index","show","store"]);
 

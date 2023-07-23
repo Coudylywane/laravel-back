@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CycleStoreRequest;
 use App\Models\Cycle;
 use Illuminate\Http\Request;
 
@@ -23,9 +24,9 @@ class CycleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CycleStoreRequest $request)
     {
-
+        return Cycle::create($request->all());
     }
 
     /**
@@ -33,7 +34,14 @@ class CycleController extends Controller
      */
     public function show(string $id)
     {
+        //Récupérer le Cycle avec ses Niveaux
+        $cycleWithNiveaux = Cycle::with("niveaux")->find($id);
 
+        if (!$cycleWithNiveaux) {
+            return response()->json(['error' => 'Le cycle n\'existe pas.'], 404);
+        }
+
+        return $cycleWithNiveaux;
     }
 
     /**
