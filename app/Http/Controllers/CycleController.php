@@ -12,12 +12,12 @@ class CycleController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has("join") && $request->join=="niveaux") {
-           return Cycle::with("niveaux")->get(); 
-         }
+        /* if($request->has("join") && $request->join=="niveaux") {
+           return Cycle::with("niveaux")->get();
+         } */
 
          return Cycle::all();
-        
+
     }
 
     /**
@@ -25,7 +25,7 @@ class CycleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -33,7 +33,7 @@ class CycleController extends Controller
      */
     public function show(string $id)
     {
-        
+
     }
 
     /**
